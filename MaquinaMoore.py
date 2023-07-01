@@ -1,4 +1,5 @@
 import random
+import itertools
 
 SAIDA_VAZIO = "vazio"
 SAIDA_ATAQUE = "ataque"
@@ -21,7 +22,12 @@ class MaquinaMoore:
     def _parse_estados(self, estados, transicoes):
         lista_estados = []
 
-        for estado in estados:
+        saidas = (SAIDA_ATAQUE, SAIDA_DEFESA, SAIDA_CURA)
+        # iterador circular, sempre que chamar next(cycler) vai ir pro proximo valor de saidas
+        # se acabar os valores comeca do comeco de novo(por isso é circular)
+        cycler = itertools.cycle(saidas)
+
+        for i, estado in enumerate(estados):
             transicoes_dict = dict()
             for transicao in transicoes[:]:
                 nome_estado_atual, nome_estado_dest, entrada = transicao
@@ -35,7 +41,7 @@ class MaquinaMoore:
                 lista_estados.append(
                     Estado(
                         estado,
-                        random.choice((SAIDA_ATAQUE, SAIDA_DEFESA, SAIDA_CURA)),
+                        next(cycler),
                         transicoes_dict,
                     )
                 )
