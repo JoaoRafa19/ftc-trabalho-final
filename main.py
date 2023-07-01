@@ -30,7 +30,7 @@ def leArquivo(diretorio):
 
 
 def main():
-    file1 = "arquivo.txt"
+    file1 = "maquina1.txt"
     estados, estadosIniciais, transicoes = leArquivo(file1)
     print(estados)
     print(estadosIniciais)
@@ -38,7 +38,8 @@ def main():
 
     m1 = MaquinaMoore(estados, estadosIniciais, transicoes)
     m1.faz_transicao('1')
-    print(m1.nome_estado_atual)
+    m1.faz_transicao('0')
+    print(m1.get_estado_atual())
 
 if __name__ == "__main__":
     main()
