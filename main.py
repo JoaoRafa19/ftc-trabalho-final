@@ -36,10 +36,9 @@ def main():
     print(estadosIniciais)
     print(transicoes)
 
-    m1 = MaquinaMoore(estados, estadosIniciais, transicoes)
+    m1 = MaquinaMoore(estados, estadosIniciais[0], transicoes)
     m1.faz_transicao('1')
     m1.faz_transicao('0')
-    print(m1.get_estado_atual())
-
+    print(m1.get_estado_atual(), m1.get_saida_atual())
 if __name__ == "__main__":
     main()

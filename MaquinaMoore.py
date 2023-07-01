@@ -14,10 +14,10 @@ class Estado:
 
 
 class MaquinaMoore:
-    def __init__(self, estados, estadosIniciais, transicoes):
-        self.nome_estado_inicial = estadosIniciais[0]
-        self.lista_estados = self._parse_estados(estados, transicoes)
-        self.nome_estado_atual = self.nome_estado_inicial
+    def __init__(self, estados, estados_inicial, transicoes):
+        self._nome_estado_inicial = estados_inicial
+        self._lista_estados = self._parse_estados(estados, transicoes)
+        self._nome_estado_atual = self._nome_estado_inicial
 
     def _parse_estados(self, estados, transicoes):
         lista_estados = []
@@ -35,7 +35,7 @@ class MaquinaMoore:
                     transicoes_dict[entrada] = nome_estado_dest
                     transicoes.remove(transicao)
 
-            if estado == self.nome_estado_inicial:
+            if estado == self._nome_estado_inicial:
                 lista_estados.append(Estado(estado, SAIDA_VAZIO, transicoes_dict))
             else:
                 lista_estados.append(
@@ -49,8 +49,8 @@ class MaquinaMoore:
         return lista_estados
 
     def _find_estado_atual(self):
-         for estado in self.lista_estados:
-            if estado.nome == self.nome_estado_atual:
+         for estado in self._lista_estados:
+            if estado.nome == self._nome_estado_atual:
                 return estado
 
     # get saida do estado atual da maquina
@@ -60,10 +60,10 @@ class MaquinaMoore:
 
     # get estado atual da maquina
     def get_estado_atual(self):
-        return self.nome_estado_atual
+        return self._nome_estado_atual
 
     # faz uma transicao de acordo com a entrada
     def faz_transicao(self, entrada):
         estado = self._find_estado_atual()
         nome_estado_dest = estado.transicoes_dict[entrada]
-        self.nome_estado_atual = nome_estado_dest
+        self._nome_estado_atual = nome_estado_dest
