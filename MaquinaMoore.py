@@ -27,7 +27,7 @@ class MaquinaMoore:
         # se acabar os valores comeca do comeco de novo(por isso é circular)
         cycler = itertools.cycle(saidas)
 
-        for i, estado in enumerate(estados):
+        for estado in estados:
             transicoes_dict = dict()
             for transicao in transicoes[:]:
                 nome_estado_atual, nome_estado_dest, entrada = transicao
@@ -53,10 +53,16 @@ class MaquinaMoore:
             if estado.nome == self.nome_estado_atual:
                 return estado
 
+    # get saida do estado atual da maquina
     def get_saida_atual(self):
         estado = self._find_estado_atual()
         return estado.saida
 
+    # get estado atual da maquina
+    def get_estado_atual(self):
+        return self.nome_estado_atual
+
+    # faz uma transicao de acordo com a entrada
     def faz_transicao(self, entrada):
         estado = self._find_estado_atual()
         nome_estado_dest = estado.transicoes_dict[entrada]
