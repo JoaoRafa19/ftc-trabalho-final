@@ -15,7 +15,7 @@ class Estado:
         self.nome = nome
         self.saida = saida
         self.transicoes_dict = transicoes_dict
-    
+
     def __str__(self):
         return f"Nome: {self.nome}, Saida: {self.saida}, Transicoes: {self.transicoes_dict}"
 
@@ -28,6 +28,7 @@ class MaquinaMoore:
 
     def _parse_estados(self, estados, transicoes):
         lista_estados = []
+        _transicoes = transicoes.copy()
 
         saidas = (Saida.ATAQUE, Saida.DEFESA, Saida.CURA)
         # iterador circular, sempre que chamar next(cycler) vai ir pro proximo valor de saidas
@@ -36,11 +37,11 @@ class MaquinaMoore:
 
         for estado in estados:
             transicoes_dict = dict()
-            for transicao in transicoes[:]:
+            for transicao in _transicoes[:]:
                 nome_estado_atual, nome_estado_dest, entrada = transicao
                 if nome_estado_atual == estado:
                     transicoes_dict[entrada] = nome_estado_dest
-                    transicoes.remove(transicao)
+                    _transicoes.remove(transicao)
 
             if estado == self._nome_estado_inicial:
                 lista_estados.append(

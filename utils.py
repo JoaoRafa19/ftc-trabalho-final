@@ -19,6 +19,9 @@ def leArquivo(diretorio):
             for k in range(len(split_string) - 1):
                 estadosIniciais.append(split_string[k + 1])
         else:
+            if lines[i] == '---':
+                break
+
             split_string = lines[i].split(' ')
             split_string.pop(1)
             split_string.pop(2)
