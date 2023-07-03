@@ -35,14 +35,14 @@ class Combate:
                 saidaPlayer2 = self.player2.maquina.get_saida_atual()
 
             if saidaPlayer1 == Saida.DEFESA:
-                self.player2.defende(self.player1)
+                self.player2.defende()
             if saidaPlayer2 == Saida.DEFESA:
-                self.player1.defende(self.player2)
+                self.player1.defende()
 
             if saidaPlayer1 == Saida.ATAQUE:
-                self.player2.ataca(self.player1)
-            if saidaPlayer2 == Saida.ATAQUE:
                 self.player1.ataca(self.player2)
+            if saidaPlayer2 == Saida.ATAQUE:
+                self.player2.ataca(self.player1)
 
             if saidaPlayer1 == Saida.CURA:
                 self.player1.cura()
