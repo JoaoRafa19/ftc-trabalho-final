@@ -1,44 +1,36 @@
 from MaquinaMoore import MaquinaMoore
-
-def leArquivo(diretorio):
-    estados = []
-    estadosIniciais = []
-    file = open(diretorio, "r")
-    lines = []
-    for line in file:
-        lines.append(line.strip())
-    size = len(lines) - 2
-    transicoes = [['' for _ in range(3)] for _ in range(size)]
-    for i in range(len(lines)):
-        if(i == 0):
-            split_string = lines[i].split(' ')
-            for k in range(len(split_string)-1):
-                estados.append(split_string[k+1])
-        elif(i == 1):
-            split_string = lines[i].split(' ')
-            for k in range(len(split_string) - 1):
-                estadosIniciais.append(split_string[k + 1])
-        else:
-            split_string = lines[i].split(' ')
-            split_string.pop(1)
-            split_string.pop(2)
-            for k in range(len(split_string)):
-                string = split_string[k]
-                transicoes[(i-2)][k] = string
-    return estados, estadosIniciais, transicoes
+from utils import *
+from combate import Combate
+from player import Player
 
 
 
-def main():
+
+def pvp():
+    clear()
     file1 = "maquina1.txt"
-    estados, estadosIniciais, transicoes = leArquivo(file1)
-    print(estados)
-    print(estadosIniciais)
-    print(transicoes)
-
+    estados, estadosIniciais, transicoes = leArquivo(file1)    
     m1 = MaquinaMoore(estados, estadosIniciais[0], transicoes)
-    m1.faz_transicao('1')
-    m1.faz_transicao('0')
-    print(m1.get_estado_atual(), m1.get_saida_atual())
+    estados, estadosIniciais, transicoes = leArquivo(file1)
+    m2 = MaquinaMoore(estados, estadosIniciais[0], transicoes)
+    nomeJogador1 = input("Digite o nome do jogador 1: ")
+    nomeJogador2 = input("Digite o nome do jogador 2: ")
+    player1 = Player(m1, nomeJogador1)
+    player2 = Player(m2, nomeJogador2)
+
+    combate = Combate(player1, player2)
+    combate.executa()
+    
+    # # m1.faz_transicao('1')
+    # # m1.faz_transicao('0')
+
+
+
+    # print(m1.get_estado_atual(), m1.get_saida_atual())
+
+
+def pve():
+    pass
+
 if __name__ == "__main__":
-    main()
+    pvp()
