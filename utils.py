@@ -1,5 +1,34 @@
 import os
 
+def leArquivoAp(diretorio):
+    estados = []
+    estadosIniciais = []
+    transicoes = []
+    file = open(diretorio, "r")
+    lines = []
+    
+    for i, line in enumerate(file):
+        if(line[0] == 'Q' and i == 0):
+            line = line.strip()
+            strip = line.split(":")[1].strip().split(" ")
+            for state in strip:
+                estados.append(state)
+        elif (i == 1):
+            line = line.strip()
+            strip = line.split(":")[1].strip().split(" ")
+            for state in strip:
+                estadosIniciais.append(state)
+        else:
+            line = line.strip()
+            state, transition =  line.split('->')
+            state = state.strip()
+            transition = transition.strip()
+            # le | desempilha | destino | empilha
+            transition = [item.strip() for item in transition.split('|')]
+            transicoes.append([state, transition])
+            
+    return estados, estadosIniciais, transicoes
+
 def leArquivo(diretorio):
     estados = []
     estadosIniciais = []
@@ -25,6 +54,7 @@ def leArquivo(diretorio):
             for k in range(len(split_string)):
                 string = split_string[k]
                 transicoes[(i-2)][k] = string
+                
     return estados, estadosIniciais, transicoes
 
 
