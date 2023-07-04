@@ -22,7 +22,7 @@ class Combate:
             try:
                 self.player1.maquina.faz_transicao(entrada)
                 self.player2.maquina.faz_transicao(entrada)
-            except:
+            except Exception as e:
                 print("Entrada inválida")
                 input("\nPRESSIONE ENTER PARA CONTINUAR...")
                 continue

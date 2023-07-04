@@ -21,8 +21,8 @@ class Estado:
 
 
 class MaquinaMoore:
-    def __init__(self, estados, estado_inicial, transicoes):
-        self._nome_estado_inicial = estado_inicial
+    def __init__(self, estados, estados_inicial, transicoes):
+        self._nome_estado_inicial = estados_inicial
         self._lista_estados = self._parse_estados(estados, transicoes)
         self._nome_estado_atual = self._nome_estado_inicial
 
@@ -81,3 +81,4 @@ class MaquinaMoore:
         estado = self._find_estado_atual()
         nome_estado_dest = estado.transicoes_dict[entrada]
         self._nome_estado_atual = nome_estado_dest
+        return self.get_saida_atual()

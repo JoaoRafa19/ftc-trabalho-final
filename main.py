@@ -1,3 +1,4 @@
+from maquina_estado_finito import FiniteStateAutomata
 from maquina_moore import MaquinaMoore
 from utils import *
 from combate import Combate
@@ -10,14 +11,21 @@ def pvp():
     clear()
     file1 = "maquina1.txt"
     file2 = "maquina2.txt"
+    
     estados, estadosIniciais, transicoes = leArquivo(file1)
     m1 = MaquinaMoore(estados, estadosIniciais[0], transicoes)
+    
     estados, estadosIniciais, transicoes = leArquivo(file2)
     m2 = MaquinaMoore(estados, estadosIniciais[0], transicoes)
+
+    m3 = FiniteStateAutomata(True)
+    m3.read_file("mef1.txt")
+
     nomeJogador1 = input("Digite o nome do jogador 1: ")
     nomeJogador2 = input("Digite o nome do jogador 2: ")
+    
     player1 = Player(m1, nomeJogador1)
-    player2 = Player(m2, nomeJogador2)
+    player2 = Player(m3, nomeJogador2)
 
     combate = Combate(player1, player2)
     combate.executa()
