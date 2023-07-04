@@ -50,6 +50,8 @@ class Combate:
             input("Pressione enter para continuar...")
             clear()
 
+        print(f"Vida final de {player1.nome} = {player1.vida}")
+        print(f"Vida final de {player2.nome} = {player2.vida}")
         if player1.vida <= 0:
             print(f"{player2.nome} Vitorioso!")
         else:
