@@ -11,48 +11,46 @@ class Combate:
 
     def executa(self):
         clear()
-        while self.player1.vida > 0 and self.player2.vida > 0:
-            clear()
-            print(f"Turno de: {[self.player1.nome, self.player2.nome][self.turno % 2]}")
 
-            print(f"Vida restante de {self.player1.nome} = {self.player1.vida}")
-            print(f"Vida restante de {self.player2.nome} = {self.player2.vida}")
+        # escolhe quem tem prioridade aleatoriamente
+        player1 = random.choice([self.player1, self.player2])
+        player2 = self.player1 if player1 == self.player2 else self.player2
+
+        print(f"Duelista {player1.nome} tem prioridade!")
+        while player1.vida > 0 and player2.vida > 0:
+            print(f"Turno de: {[player1.nome, player2.nome][self.turno % 2]}")
+
+            print(f"Vida restante de {player1.nome} = {player1.vida}")
+            print(f"Vida restante de {player2.nome} = {player2.vida}")
             entrada = input("Qual leitura você deseja fazer? ")
 
             try:
-                self.player1.maquina.faz_transicao(entrada)
-                self.player2.maquina.faz_transicao(entrada)
+                player1.maquina.faz_transicao(entrada)
+                player2.maquina.faz_transicao(entrada)
             except Exception as e:
                 print("Entrada inválida")
                 input("\nPRESSIONE ENTER PARA CONTINUAR...")
+                clear()
                 continue
 
-            if self.turno % 2 == 0:
-                saidaPlayer2 = self.player2.maquina.get_saida_atual()
-                saidaPlayer1 = self.player1.maquina.get_saida_atual()
-            else:
-                saidaPlayer1 = self.player1.maquina.get_saida_atual()
-                saidaPlayer2 = self.player2.maquina.get_saida_atual()
+            print(f'Alcançou um estado de {player1.maquina.get_saida_atual().value} em {player1.nome}')
+            print(f'Alcançou um estado de {player2.maquina.get_saida_atual().value} em {player2.nome}\n')
 
-            if saidaPlayer1 == Saida.DEFESA:
-                self.player2.defende()
-            if saidaPlayer2 == Saida.DEFESA:
-                self.player1.defende()
+            if player1.maquina.get_saida_atual() == Saida.ATAQUE:
+                player1.ataca(player2)
+            elif player1.maquina.get_saida_atual() == Saida.CURA:
+                player1.cura()
 
-            if saidaPlayer1 == Saida.ATAQUE:
-                self.player1.ataca(self.player2)
-            if saidaPlayer2 == Saida.ATAQUE:
-                self.player2.ataca(self.player1)
-
-            if saidaPlayer1 == Saida.CURA:
-                self.player1.cura()
-            if saidaPlayer2 == Saida.CURA:
-                self.player2.cura()
+            if player2.maquina.get_saida_atual() == Saida.ATAQUE:
+                player2.ataca(player1)
+            elif player2.maquina.get_saida_atual() == Saida.CURA:
+                player2.cura()
 
             self.turno += 1
             input("Pressione enter para continuar...")
+            clear()
 
-        if self.player1.vida <= 0:
-            print(f"{self.player2.nome} Vitorioso!")
+        if player1.vida <= 0:
+            print(f"{player2.nome} Vitorioso!")
         else:
-            print(f"{self.player1.nome} Vitorioso!")
+            print(f"{player1.nome} Vitorioso!")

@@ -10,7 +10,6 @@ class Player:
 
     def ataca(self, player)->int:
         dano = random.randint(1, 33)
-        print(f"Alcançou um estado de ataque em {self.nome}")
         print(f"Ataque do duelista {self.nome}: {dano}!")
         if player.maquina.get_saida_atual() == Saida.DEFESA:
             aparagem = int(random.random() * dano)
@@ -21,13 +20,9 @@ class Player:
         player.vida -= dano
         return dano
 
-    def defende(self):
-        print(f"Alcançou um estado de defesa em {self.nome}")
-
     def cura(self):
         valor = random.randint(1, 15)
         vida_total = self.vida + valor
-        print(f"Alcançou um estado de cura em {self.nome}")
         if self.vida <= 0:
             print(f"Duelista {self.nome} com vida negativa! Não é possível curar!")
             return
