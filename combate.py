@@ -37,15 +37,15 @@ class Combate:
 
             saidaPlayer1 = player1.maquina.get_saida_atual()
             saidaPlayer2 = player2.maquina.get_saida_atual()
-        
-            if saidaPlayer1 == Saida.ATAQUE:
+
+            if saidaPlayer1.value == Saida.ATAQUE.value:
                 player1.ataca(player2)
-            if saidaPlayer1 == Saida.CURA:
+            elif saidaPlayer1.value == Saida.CURA:
                 player1.cura()
 
-            if saidaPlayer2 == Saida.ATAQUE:
+            if saidaPlayer2.value == Saida.ATAQUE.value:
                 player2.ataca(player1)
-            if saidaPlayer2 == Saida.CURA:
+            elif saidaPlayer2.value == Saida.CURA.value:
                 player2.cura()
 
             self.turno += 1

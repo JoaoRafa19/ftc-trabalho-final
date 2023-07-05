@@ -6,11 +6,6 @@ class Player:
         self.nome = nome
         self.maquina = maquina
         self.vida = 100
-    
-    
-    
-    def recebe_dano(self, defesa=False)->int:
-        aparagem = random.randint(1, 100)
 
     def ataca(self, player):
         if self.vida <= 0:
