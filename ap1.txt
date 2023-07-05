@@ -1,8 +1,8 @@
-Q: IA A D C
-I: IA
-IA -> 1 | * | IA | *
-IA -> 2 | * | A | 2
-IA -> 0 | * | D | 0
+Q: IP A D C
+I: IP
+IP -> 1 | * | IP | *
+IP -> 2 | * | A | 2
+IP -> 0 | * | D | 0
 A -> 0 | 2 | D | 0
 A -> 1 | 0 | C | 1
 A -> 2 | 2 | A | 2

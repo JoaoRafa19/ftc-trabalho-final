@@ -6,8 +6,7 @@ from combate import Combate
 from player import Player
 
 
-def inicializaPlayer():
-    nomePlayer = input("Digite o nome do jogador: ")
+def inicializaPlayer(nomePlayer):
     tipoMaquina = input(
         "Digite o tipo de máquina: (1 - Moore, 2 - Automato de Pilha 3 - Estado Finito)")
     file1 = input("Digite o nome do arquivo: ")
@@ -29,8 +28,8 @@ def pvp():
     file = "ap1.txt"
     estados, estados_iniciais, transicoes = leArquivoAp(file)
 
-    player1 = inicializaPlayer()
-    player2 = inicializaPlayer()
+    player1 = inicializaPlayer('PILTOVER')
+    player2 = inicializaPlayer('ZAUN')
 
     combate = Combate(player1, player2)
     combate.executa()
