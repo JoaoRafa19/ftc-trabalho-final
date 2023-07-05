@@ -54,7 +54,5 @@ class Combate:
 
         print(f"Vida final de {player1.nome} = {player1.vida}")
         print(f"Vida final de {player2.nome} = {player2.vida}")
-        if player1.vida <= 0:
-            print(f"{player2.nome} Vitorioso!")
-        else:
-            print(f"{player1.nome} Vitorioso!")
+        
+        print(f"{player2.nome if player1.vida <=0 else player1.nome } Vitorioso!")
