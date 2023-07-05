@@ -1,5 +1,4 @@
-import turnos
-from MaquinaMoore import Saida
+from saida import Saida
 from utils import clear
 
 class Combate:
@@ -10,7 +9,6 @@ class Combate:
     
         
     def executa(self):
-        clear()
         while self.player1.vida > 0 and self.player2.vida > 0:
             clear()
             print("Turno de: {}".format([self.player1.nome, self.player2.nome][self.turno % 2]))
@@ -18,12 +16,10 @@ class Combate:
             print("Vida restante de {} = {}".format(self.player1.nome, self.player1.vida))
             print("Vida restante de {} = {}".format(self.player2.nome, self.player2.vida))
             entrada = input("Qual leitura você deseja fazer?")
-            
-            
             try:
                 self.player1.maquina.faz_transicao(entrada)
                 self.player2.maquina.faz_transicao(entrada)
-            except:
+            except Exception as e:
                 print("Entrada inválida")
                 input("\nPRESSIONE ENTER PARA CONTINUAR...")
                 continue
@@ -40,7 +36,7 @@ class Combate:
                 print("Dano no duelista {}:{}".format(self.player2.nome, dano))
             if saidaPlayer2 == Saida.ATAQUE:
                 dano= self.player1.recebe_dano(saidaPlayer1 != Saida.DEFESA)
-                print("Dano no duelista {}:{}".format(self.player2.nome, dano))
+                print("Dano no duelista {}:{}".format(self.player1.nome, dano))
             
             if saidaPlayer1 == Saida.CURA:
                 self.player1.cura()
@@ -49,10 +45,8 @@ class Combate:
                 
             self.turno += 1
             input("Pressione enter para continuar...")
-        if self.player1.vida <= 0:
-            print("{} Vitorioso!".format(self.player2.nome))
-        else:
-            print("{} Vitorioso!".format(self.player1.nome))
+        
+        print("{} Vitorioso!".format(self.player2.nome if self.player1.vida <= 0 else self.player1.nome))
             
 
         
