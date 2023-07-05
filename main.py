@@ -5,11 +5,40 @@ from utils import *
 from combate import Combate
 from player import Player
 
+intro = """
+                             
+\t\t\t\t   @@@@@@@@  @@@@@@@   @@@@@@@  
+\t\t\t\t   @@@@@@@@  @@@@@@@  @@@@@@@@  
+\t\t\t\t   @@!         @@!    !@@       
+\t\t\t\t   !@!         !@!    !@!       
+\t\t\t\t   @!!!:!      @!!    !@!       
+\t\t\t\t   !!!!!:      !!!    !!!       
+\t\t\t\t   !!:         !!:    :!!       
+\t\t\t\t   :!:         :!:    :!:       
+\t\t\t\t    ::          ::     ::: :::  
+\t\t\t\t    :           :      :: :: :
+
+                                   
+ |`    _  _| _  _ _  _  _ _|_ _  _   _| _   _|_ _  _  _. _    _| _    _ _  _ _ |_  _ _|_ _ 
+ |-|_|| |(_|(_|| | |(/_| | | (_)_\\  (_|(_|   | (/_(_)| |(_|  (_|(_)  (_(_)| | ||_)(_| | (/_
+ """
+
+win = """
+|----------------------------------------------------------|
+| dP     dP dP d888888P  .88888.   888888ba  dP  .d888888  |
+| 88     88 88    88    d8'   `8b  88    `8b 88 d8'    88  |
+| 88    .8P 88    88    88     88 a88aaaa8P' 88 88aaaaa88a |
+| 88    d8' 88    88    88     88  88   `8b. 88 88     88  |
+| 88  .d8P  88    88    Y8.   .8P  88     88 88 88     88  |
+| 888888'   dP    dP     `8888P'   dP     dP dP 88     88  |
+|----------------------------------------------------------|
+"""
 
 def inicializaPlayer(nomePlayer):
+    print("\t\t",intro)
     print(f'Player: {nomePlayer}')
     tipoMaquina = input(
-        "Digite o tipo de máquina: (1 - Moore, 2 - Automato de Pilha 3 - Estado Finito): ")
+        "Digite o tipo de máquina:\n\t1 - Máquina de Moore\n\t2 - Autômato de Pilha\n\t3 - Máquina de Estado Finito\n> ")
     file1 = input("Digite o nome do arquivo: ")
     if tipoMaquina == '1':
         estados, estadosIniciais, transicoes = leArquivo(file1)
@@ -34,7 +63,7 @@ def pvp():
 
     combate = Combate(player1, player2)
     combate.executa()
-
+    print(win)
     # # m1.faz_transicao('1')
     # # m1.faz_transicao('0')
 
