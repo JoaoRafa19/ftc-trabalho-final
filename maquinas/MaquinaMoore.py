@@ -1,8 +1,23 @@
 import random
 import enum
 import itertools
-from estado import Estado
-from saida import Saida
+
+class Saida(enum.Enum):
+    ATAQUE = "ataque"
+    DEFESA = "defesa"
+    CURA = "cura"
+    VAZIO = "vazio"
+
+
+
+class Estado:
+    def __init__(self, nome, saida, transicoes_dict):
+        self.nome = nome
+        self.saida = saida
+        self.transicoes_dict = transicoes_dict
+
+    def __str__(self):
+        return f"Nome: {self.nome}, Saida: {self.saida}, Transicoes: {self.transicoes_dict}"
 
 
 class MaquinaMoore:
@@ -13,6 +28,7 @@ class MaquinaMoore:
 
     def _parse_estados(self, estados, transicoes):
         lista_estados = []
+        _transicoes = transicoes.copy()
 
         saidas = (Saida.ATAQUE, Saida.DEFESA, Saida.CURA)
         # iterador circular, sempre que chamar next(cycler) vai ir pro proximo valor de saidas
@@ -21,29 +37,30 @@ class MaquinaMoore:
 
         for estado in estados:
             transicoes_dict = dict()
-            for transicao in transicoes[:]:
+            for transicao in _transicoes[:]:
                 nome_estado_atual, nome_estado_dest, entrada = transicao
                 if nome_estado_atual == estado:
                     transicoes_dict[entrada] = nome_estado_dest
-                    transicoes.remove(transicao)
+                    _transicoes.remove(transicao)
 
             if estado == self._nome_estado_inicial:
                 lista_estados.append(
                     Estado(estado, Saida.VAZIO, transicoes_dict))
             else:
-                estado = Estado(
-                    estado,
-                    next(cycler),
-                    transicoes_dict,
-                )
                 lista_estados.append(
-                    estado
+                    Estado(
+                        estado,
+                        next(cycler),
+                        transicoes_dict,
+                    )
                 )
 
         return lista_estados
 
     def get_estados(self):
         return self._lista_estados
+
+
 
     def _find_estado_atual(self):
         for estado in self._lista_estados:

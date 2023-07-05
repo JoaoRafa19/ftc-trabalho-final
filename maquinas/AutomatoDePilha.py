@@ -7,9 +7,6 @@ class Estado:
         self.transicoes = transicoes
         self.saida = saida
 
-
-
-
 class Transicao:
     
     def __init__(self, simbolo_a_ser_lido, simbolo_a_desempilhar, estado_destino, simbolo_a_empilhar):

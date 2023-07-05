@@ -1,5 +1,5 @@
 import random
-
+from saida import Saida
 
 class Player:
     def __init__(self, maquina , nome):
@@ -11,20 +11,28 @@ class Player:
     
     def recebe_dano(self, defesa=False)->int:
         aparagem = random.randint(1, 100)
+
+    def ataca(self, player):
+        if self.vida <= 0:
+            return
         dano = random.randint(1, 33)
-        if defesa:
-            dano = dano - (aparagem // 100 * dano)
-        if self.vida > 0:
-            self.vida -= dano
-            print("Alcançou um estado de defesa em {}\nAparagem do duelista {}:{}!".format(self.nome, self.nome, aparagem))
-        return dano
-    
-    
+        print(f"Ataque do duelista {self.nome}: {dano}!")
+        if player.maquina.get_saida_atual() == Saida.DEFESA:
+            aparagem = int(random.random() * dano)
+            dano -= aparagem
+            print(f"Aparagem do duelista {player.nome}: {aparagem}!")
+
+        print(f"Dano no duelista {player.nome}: {dano}")
+        player.vida -= dano
+
     def cura(self):
-        vida_total = self.vida + random.randint(1, 15)
+        if self.vida <= 0:
+            return
+        valor = random.randint(1, 15)
+        vida_total = self.vida + valor
+
+        print(f"Cura no duelista {self.nome}: {valor}")
         if vida_total > 100:
             self.vida = 100
         else:
             self.vida = vida_total
-    
-            
