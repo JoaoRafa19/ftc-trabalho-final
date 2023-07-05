@@ -1,6 +1,6 @@
 from maquinas.MaquinaMoore import MaquinaMoore
 from maquinas.AutomatoDePilha import AutomatoDePilha
-from maquina_estado_finito import FiniteStateAutomata
+from maquinas.FiniteStateAutomata import FiniteStateAutomata
 from utils import *
 from combate import Combate
 from player import Player
