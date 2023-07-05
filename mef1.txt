@@ -4,9 +4,12 @@ F: atk def cur
 ini -> atk | 0
 ini -> def | 1
 ini -> cur | 2
+atk -> atk | 0
 atk -> def | 1
 atk -> cur | 2
+def -> def | 1
 def -> atk | 0
 def -> cur | 2
+cur -> cur | 2
 cur -> atk | 0
 cur -> def | 1
