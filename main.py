@@ -7,6 +7,7 @@ from player import Player
 
 
 def inicializaPlayer(nomePlayer):
+    print(f'player: {nomePlayer}')
     tipoMaquina = input(
         "Digite o tipo de máquina: (1 - Moore, 2 - Automato de Pilha 3 - Estado Finito)")
     file1 = input("Digite o nome do arquivo: ")
